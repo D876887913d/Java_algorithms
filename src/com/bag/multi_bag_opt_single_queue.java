@@ -1,6 +1,13 @@
 package com.bag;
 import java.util.Scanner;
-
+/*
+输入样例
+4 5
+1 2 3
+2 4 1
+3 4 3
+4 5 2
+ */
 public class multi_bag_opt_single_queue {
     public static void main(String [] args){
         Scanner scanner = new Scanner(System.in);
@@ -24,8 +31,10 @@ public class multi_bag_opt_single_queue {
         int [][] dp = new int [N + 1][V + 1];
         int [] m_queue = new int [V + 1];
 
-        for(int i = 1; i <= N; i ++){
-            for(int r = 0; r <= volums[i - 1]; ++ r){
+//        ============================单调队列进行优化部分============================
+        for(int i = 1; i <= N; ++ i){
+//          r表示的是余数，所以mod的过程中是不能等于volume的。可以理解为V(或者j，表示的是dp数组的体积维度) % volume
+            for(int r = 0; r < volums[i - 1]; ++ r){
                 int mq_head = 0;
                 int mq_tail = -1;
                 for(int j = r; j <= V; j += volums[i - 1]){
@@ -48,8 +57,8 @@ public class multi_bag_opt_single_queue {
                             / volums[i - 1] * values[i - 1];
                 }
             }
-
         }
+//        ==========================单调队列进行优化部分结束============================
 
         System.out.println(dp[N][V]);
     }
