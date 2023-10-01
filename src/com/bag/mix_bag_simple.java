@@ -51,8 +51,9 @@ public class mix_bag_simple {
 
             int k = 1;
             while(k <= number){
-                volumes[cnt] = volum * number;
-                values[cnt] = value * number;
+//              注意！这部分进行二进制分解的时候是用的k一段一段来进行分解
+                volumes[cnt] = volum * k;
+                values[cnt] = value * k;
                 cnt += 1;
                 number -= k;
                 k *= 2;
@@ -68,7 +69,7 @@ public class mix_bag_simple {
 
 //      ===========================拷贝数组优化=================================
         int[] dp = new int[V + 1];
-        for(int i = 1; i <= N; i ++){
+        for(int i = 1; i <= cnt; i ++){
             for(int j = V; j >= volumes[i - 1]; j --){
                 dp[j] = Math.max(dp[j], dp[j - volumes[i - 1]] + values[i - 1]);
             }
